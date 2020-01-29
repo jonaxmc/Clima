@@ -1,47 +1,31 @@
-const axios = require('axios')
-const clima = require('./controlador/clima')
-const ubicacion = require('./controlador/ubicacion')
+//Hace un llamado a las librerias y métodos 
+const axios = require('axios'); //Llama la librería axios
+const clima = require('./controlador/clima'); //Función para obtener el clima
+const ubicacion = require('./controlador/ubicacion'); //Función para obtener las coordenadas
+
+//Método para obtener la ciudad desde la consola
 const argv = require('yargs').options({
     nombre: {
-        alias: "n",
+        alias: "n", //Crea un alias para la ciudad
         desc: "nombre ciudad para obtener clima",
         demand: true
     }
 
 }).argv;
 
-let getInfo = async(nombre) => {
+//Método para obtener el clima de una ciudad determinada
+const getInfo = async(ciudad) => {
     try {
-        let coors = await ubicacion.getCiudadLatLon(nombre)
-        let temp = await clima.getClima(coors.lat, coors.lng);
-
-        return ` El clima en ${coors.nombre} es de ${temp.temp}`
+        const coors = await ubicacion.getCiudadLatLon(ciudad); //Guarda en una constante la Latitud y Longitud de la ciudad
+        const temp = await clima.getClima(coors.lat, coors.lon); //Guarda en una constante el valor del clima de la ciudad de acuerdo a su latitud y longitud
+        return ` El clima en ${coors.name} es de ${temp} °C`; //Imprime la temperatura de la ciudad
 
     } catch (error) {
-        return ` No se pudo determinar el clima en ${coors.nombre}`;
+        return ` No se pudo determinar el clima en ${ciudad}`; //Si existe un error, se mostrará el mensaje.
     }
 
 }
 
 getInfo(argv.nombre)
-    .then(data => {
-        console.log(data);
-    })
-    .catch(err => {
-        console.log(err)
-    })
-
-
-
-// const ciudad = encodeURI(argv.nombre)
-// const instance = axios.create({
-//     baseURL: `https://devru-latitude-longitude-find-v1.p.rapidapi.com/latlon.php?location=${ciudad}`,
-//     headers: { "X-RapidAPI-Key": "ea164cc3admshce81769bb029b06p1d2f9ejsn57543c2faebd" }
-// });
-
-// instance.get()
-//     .then(resp => {
-//         console.log(resp.data.Results[0])
-//     }).catch(err => {
-//         console.log("ERROR:", err)
-//     })
+    .then(console.log)
+    .catch(console.log);

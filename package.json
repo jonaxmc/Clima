@@ -1,16 +1,15 @@
 {
-  "name": "05-clima",
-  "version": "1.0.0",
-  "description": "aplicacion clima",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "esteban carrera",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.19.0",
-    "save": "^2.4.0",
-    "yargs": "^15.0.2"
-  }
+    "name": "05-clima",
+    "version": "1.0.0",
+    "description": "aplicacion clima",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Jonathan Mañay",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.2",
+        "yargs": "^15.1.0"
+    }
 }
